@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Vue Demo</title>
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+  <header>
+    <h1>Simple Vue Demo</h1>
+  </header>
+  <main>
+    <div id='todos'>
+      <ol>
+        <li v-for='todo in todos'>
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+  </main>
+
+  <script>
+  // launch Todos component and pass in data
+  var app = new Vue({
+    el: '#todos',
+    data: {
+      todos: [
+        { text: 'Learn JavaScript' },
+        { text: 'Learn Vue' },
+        { text: 'Build something awesome' }
+      ]
+    }
+  });
+  </script>
+
+</body>
+</html>
