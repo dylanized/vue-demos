@@ -6,7 +6,7 @@ import Vue from 'vue';
 // load App component
 import App from './App';
 
-// ??
+// disable dev msg
 Vue.config.productionTip = false;
 
 // launch App
