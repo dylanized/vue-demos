@@ -1,5 +1,3 @@
-/* eslint-disable no-new */
-
 // load Vue library
 import Vue from 'vue';
 
