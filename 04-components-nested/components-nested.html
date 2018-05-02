@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+  <main>
+    <todo-list :todos='todos'></todo-list>
+  </main>
+
+  <script>
+  // define TodoList component
+  Vue.component('todo-list', {
+    props: ['todos'],
+    template: `
+        <ol>
+          <todo-item
+            v-for='todo in todos'
+            :todo='todo'
+            :key='todo.id'
+          ></todo-item>
+        </ol>`,
+  });
+  // define TodoItem component
+  Vue.component('todo-item', {
+    props: ['todo'],
+    template: '<li>{{ todo.text }}</li>',
+  });
+  // launch Vue and pass in data
+  new Vue({
+    el: 'main',
+    data: {
+      todos: [
+        { text: 'Learn JavaScript' },
+        { text: 'Learn Vue' },
+        { text: 'Build something awesome' },
+      ],
+    },
+  });
+  </script>
+
+</body>
+</html>

@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Simple Vue Demo</title>
+  <title></title>
   <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
 </head>
 <body>
-  <header>
-    <h1>Simple Vue Demo</h1>
-  </header>
   <main>
-    <div id='todos'>
+    <!-- TodoList widget -->
+    <section id='todo-list'>
       <ol>
         <li v-for='todo in todos'>
           {{ todo.text }}
         </li>
       </ol>
-    </div>
+    </section>
   </main>
 
   <script>
-  // launch Todos component and pass in data
+  // launch TodoList component and pass in data
   var app = new Vue({
-    el: '#todos',
+    el: '#todo-list',
     data: {
       todos: [
         { text: 'Learn JavaScript' },

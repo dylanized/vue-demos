@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+  <main>
+    <section id='msg'>{{ msg }}</section>
+  </main>
+
+  <script>
+  // render Msg tag and pass in data
+  new Vue({
+    el: '#msg',
+    data: {
+      msg: 'Here is a message'
+    }
+  });
+  </script>
+
+</body>
+</html>
