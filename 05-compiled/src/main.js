@@ -11,7 +11,7 @@ Vue.config.productionTip = false;
 
 // launch App
 new Vue({
-  el: '#app',
+  el: 'main',
   components: { App },
   template: '<App />',
 });
