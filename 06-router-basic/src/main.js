@@ -4,10 +4,10 @@ import Vue from 'vue';
 // disable dev msg
 Vue.config.productionTip = false;
 
-// define components
-const NotFound = { template: '<p>Page not found</p>' };
-const Home = { template: '<p>home page</p>' };
-const About = { template: '<p>about page</p>' };
+// define page components
+const NotFound = { template: '<p>Page not found</p>' },
+      Home = { template: '<p>Home page</p>' },
+      About = { template: '<p>About page</p>' };
 
 // define routes and component names
 const routes = {
