@@ -1,5 +1,3 @@
-/* eslint-disable no-new */
-
 // load deps
 import Vue from 'vue';
 import VueRouter from 'vue-router';
