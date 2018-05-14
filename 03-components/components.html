@@ -9,6 +9,7 @@
     <demo-prop msg='This message was passed by static prop'></demo-prop>
     <demo-prop :msg='dynamicMsg'></demo-prop>
     <demo-slot>This message was passed by slot</demo-slot>
+    <demo-slot></demo-slot>
   </main>
 
   <script>
@@ -19,7 +20,7 @@
   });
   // define demoSlot component
   Vue.component('demo-slot', {
-    template: '<h3><slot></slot></h3>',
+    template: '<h3><slot>This is a slot default message</slot></h3>',
   });
   // launch Vue and pass in data
   new Vue({
