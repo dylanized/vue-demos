@@ -1,7 +1,7 @@
 <template>
   <section>
     <h3 :id='id'>{{ msg }}</h3>
-    <slot></slot>
+    <slot>This is a slot fallback message</slot>
   </section>
 </template>
 
