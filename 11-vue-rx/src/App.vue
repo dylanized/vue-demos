@@ -12,9 +12,11 @@ import filter from 'rxjs/add/operator/filter';
 // export App with components
 export default {
   name: 'App',
+  // mount subscriptions
   subscriptions () {
     return {
-      count$: Observable.interval(1000),
+      // mount counter that is filtered by even numbers
+      count$: Observable.interval(1000).filter((value) => value % 2 == 0),
     }
   },
 };
