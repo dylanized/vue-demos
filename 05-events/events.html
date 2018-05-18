@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+  <main>
+    <button-counter></button-counter>
+  </main>
+
+  <script>
+  Vue.component('button-counter', {
+    data: function () {
+      return {
+        count: 0
+      }
+    },
+    template: '<button @click="count++">You clicked me {{ count }} times.</button>'
+  });
+  // launch App
+  new Vue({
+    el: 'main',
+  });
+  </script>
+
+</body>
+</html>
