@@ -6,17 +6,33 @@
 </head>
 <body>
   <main>
-    <button-counter></button-counter>
+    <simple-counter></simple-counter>
+    <method-counter></method-counter>
   </main>
 
   <script>
-  Vue.component('button-counter', {
-    data: function () {
+  // register simple counter component
+  Vue.component('simple-counter', {
+    data () {
       return {
         count: 0
       }
     },
     template: '<button @click="count++">You clicked me {{ count }} times.</button>'
+  });
+  // register counter component using method
+  Vue.component('method-counter', {
+    data () {
+      return {
+        count: 0
+      }
+    },
+    methods: {
+      addCount () {
+        this.count++;
+      }
+    },
+    template: '<button @click="addCount">You clicked me {{ count }} times.</button>'
   });
   // launch App
   new Vue({
