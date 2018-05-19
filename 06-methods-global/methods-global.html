@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+<body>
+  <main>
+    <p><counter-control /></p>
+    <p><counter-display-prop :count='count' /></p>
+    <p><counter-display-root /></p>
+  </main>
+
+  <script>
+  // register counterControl
+  Vue.component('counter-control', {
+    template: '<button @click="$root.addCount">Click Me</button>',
+  });
+  // register counterDisplayProp
+  Vue.component('counter-display-prop', {
+    template: '<h3>{{ count }}</h3>',
+    props: ['count'],
+  });
+  // register counterDisplayRoot
+  Vue.component('counter-display-root', {
+    template: '<h3>{{ $root.count }}</h3>',
+  });
+  // launch App
+  new Vue({
+    el: 'main',
+    data () {
+      return {
+        count: 0
+      }
+    },
+    methods: {
+      addCount () {
+        this.count++;
+      }
+    },
+  });
+  </script>
+
+</body>
+</html>
