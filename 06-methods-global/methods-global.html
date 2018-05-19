@@ -23,7 +23,7 @@
   });
   // register counterDisplayRoot
   Vue.component('counter-display-root', {
-    template: '<h3>{{ $root.count }}</h3>',
+    template: '<h3>{{ $root.count }} or  {{ $root.doubleCount }}</h3>',
   });
   // launch App
   new Vue({
@@ -36,8 +36,13 @@
     methods: {
       addCount () {
         this.count++;
-      }
+      },
     },
+    computed: {
+      doubleCount () {
+        return this.count * 2;
+      },
+    }
   });
   </script>
 
