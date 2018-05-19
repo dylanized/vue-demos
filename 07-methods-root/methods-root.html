@@ -14,7 +14,7 @@
   <script>
   // register counterControl
   Vue.component('counter-control', {
-    template: '<button @click="$root.addCount">Click Me</button>',
+    template: '<button @click="$root.addCount">You clicked me {{ $root.count }} times.</button>',
   });
   // register counterDisplayProp
   Vue.component('counter-display-prop', {
@@ -23,7 +23,7 @@
   });
   // register counterDisplayRoot
   Vue.component('counter-display-root', {
-    template: '<h3>{{ $root.count }} {{ $root.doubleCount }} {{ $root.msg }}</h3>',
+    template: '<h3>{{ $root.getCount() }} * 2 = {{ $root.doubleCount }}</h3>',
   });
   // launch App
   new Vue({
@@ -31,24 +31,26 @@
     data () {
       return {
         count: 0,
-        msg: '',
       }
     },
     methods: {
       addCount () {
         this.count++;
       },
+      getCount () {
+        return this.count;
+      }
     },
     computed: {
       doubleCount () {
         return this.count * 2;
-      },
+      }
     },
     watch: {
-      count() {
-        this.msg = '*';
-      },
-    }
+      count () {
+        console.log(this.count);
+      }
+    },
   });
   </script>
 
