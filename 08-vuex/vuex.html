@@ -10,6 +10,7 @@
     <p><counter-control /></p>
     <p><counter-display-prop :count='$store.state.count' /></p>
     <p><counter-display-root /></p>
+    <msg-widget />
   </main>
 
   <script>
@@ -26,19 +27,30 @@
   Vue.component('counter-display-root', {
     template: '<h3>{{ $root.state.count }} * 2 = {{ $store.getters.doubleCount }}</h3>',
   });
+  // register msgWidget
+  Vue.component('msg-widget', {
+    template: `<div><p>{{ $store.state.msg }}</p><p><button @click="$store.dispatch('setMsg', 'Foobar')">Click Me</button></p></div>`,
+  });
   // build store
   const store = new Vuex.Store({
   	state: {
   		count: 0,
+      msg: 'Hello World',
   	},
   	mutations: {
       ADDCOUNT (state) {
         state.count++;
       },
+      SETMSG (state, msg) {
+        state.msg = msg;
+      },
   	},
   	actions: {
       addCount (context) {
-        context.commit('ADDCOUNT')
+        context.commit('ADDCOUNT');
+      },
+      setMsg (context, msg) {
+        context.commit('SETMSG', msg);
       },
   	},
     getters: {
