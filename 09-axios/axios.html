@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title></title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
+  </head>
+  <body>
+    <div class='container' id='app'>
+      <h3 class='text-center'>VueNews</h3>
+      <div class='columns medium-3' v-for='result in results'>
+        <div class='card'>
+          <div class='card-divider'>
+            {{ result.title }}
+          </div>
+          <div class='card-section'>
+            <p>{{ result.abstract }}.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        results: []
+      },
+      mounted() {
+        axios.get('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=f29a4fd95df74ed5bdfafb45684f0231')
+        .then(response => {this.results = response.data.results})
+      }
+    });
+  </script>
+</html>
