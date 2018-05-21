@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js'></script>
+</head>
+<body>
+  <main>
+    <p><counter-control /></p>
+    <p><counter-display-prop :count='$store.state.count' /></p>
+    <p><counter-display-root /></p>
+  </main>
+
+  <script>
+  // register counterControl
+  Vue.component('counter-control', {
+    template: `<button @click="$store.dispatch('addCount')">You clicked me {{ $store.state.count }} times.</button>`,
+  });
+  // register counterDisplayProp
+  Vue.component('counter-display-prop', {
+    template: '<h3>{{ count }}</h3>',
+    props: ['count'],
+  });
+  // register counterDisplayRoot
+  Vue.component('counter-display-root', {
+    template: '<h3>{{ $root.state.count }} * 2 = {{ $store.getters.doubleCount }}</h3>',
+  });
+  // build store
+  const store = new Vuex.Store({
+  	state: {
+  		count: 0,
+  	},
+  	mutations: {
+      ADDCOUNT (state) {
+        state.count++;
+      },
+  	},
+  	actions: {
+      addCount (context) {
+        context.commit('ADDCOUNT')
+      },
+  	},
+    getters: {
+      doubleCount (state) {
+        return state.count * 2;
+      },
+    }
+  });
+  // launch App
+  new Vue({
+    el: 'main',
+    store,
+    data () {
+      return {
+        state: this.$store.state,
+      }
+    },
+    watch: {
+      count () {
+        console.log(this.$store.state.count);
+      }
+    },
+  });
+  </script>
+
+</body>
+</html>
