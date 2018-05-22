@@ -57,7 +57,7 @@
       doubleCount (state) {
         return state.count * 2;
       },
-    }
+    },
   });
   // launch App
   new Vue({
@@ -69,7 +69,7 @@
       }
     },
     watch: {
-      count () {
+      '$store.state.count' () {
         console.log(this.$store.state.count);
       }
     },
