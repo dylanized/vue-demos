@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title></title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+  </head>
+  <body>
+    <div class='container' id='app'>
+      <form id='controls'>
+        <fieldset>
+          <label>Text Input</label>
+          <input type='text' v-model='demoForm.input' />
+        </fieldset>
+        <fieldset>
+          <label>Textarea</label>
+          <textarea v-model='demoForm.textarea'></textarea>
+        </fieldset>
+        <fieldset>
+          <label>Select</label>
+          <select v-model='demoForm.select'>
+            <option v-for='option in demoForm.options' :value='option.value'>
+              {{ option.text }}
+            </option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <label>Checkbox</label>
+          <input type='checkbox' v-model='demoForm.checkbox' />
+        </fieldset>
+        <fieldset>
+          <label>Radio</label>
+          <input type='radio' v-model='demoForm.radio' value='Radio 1' />
+          <input type='radio' v-model='demoForm.radio' value='Radio 2' />
+          <input type='radio' v-model='demoForm.radio' value='Radio 3' />
+        </fieldset>
+      </form>
+      <section id='display'>
+        <pre>{{ demoForm }}</pre>
+      </section>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          demoForm: {
+            input: 'Input Value',
+            textarea: 'Textarea Value',
+            select: 'Option 2',
+            options: [
+              { value: 'Option 1', text: 'Option 1' },
+              { value: 'Option 2', text: 'Option 2' },
+              { value: 'Option 3', text: 'Option 3' },
+            ],
+            checkbox: true,
+            radio: 'Radio 2',
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

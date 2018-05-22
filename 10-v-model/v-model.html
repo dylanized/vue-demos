@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title></title>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+  </head>
+  <body>
+    <div class='container' id='app'>
+      <div>
+        <h2>The v-model</h2>
+        <input :value='data1' @input='data1 = $event.target.value'>
+        <p>data1: {{ data1 }} </p>
+      </div>
+      <div>
+        <input type='text' v-model='data2'>
+        <p>data2: {{ data2 }} </p>
+      </div>
+      <h2>Using an unexist property</h2>
+      Name: <input v-model='person.name'>
+      <br><br>
+      Phone: <input v-model='person.phone'>
+      <br><br>
+      <pre class='column'>{{ person }}</pre>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          data1: '1',
+          data2: '2',
+          person: {
+            phone: '110'
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
