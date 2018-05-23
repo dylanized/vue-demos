@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'></script>
+</head>
+<body>
+  <main>
+    <search-input></search-input>
+    <search-results></search-results>
+  </main>
+  <script>
+  // register components
+  Vue.component('search-input', {
+    template: `<p><input type='text' v-model='$store.state.search' /></p>`,
+  });
+  Vue.component('search-results', {
+    template: '<section><ul><li v-for="result in $store.state.results">{{ result.name }}</li></ul></section>',
+  });
+  // build store
+  const store = new Vuex.Store({
+    // define initial state
+  	state: {
+  		search: '',
+      results: [],
+  	},
+    // define actions
+  	actions: {
+      fetchResults (context, search) {
+        // query the search api asyncronously
+        axios.get(`https://demo.dataverse.org/api/search?q=${ search }`)
+        // then save the results
+        .then(res => context.commit('SAVE_RESULTS', res.data.data.items));
+      },
+  	},
+    // define mutations
+  	mutations: {
+      SAVE_RESULTS: (state, payload) => state.results = payload,
+  	},
+  });
+  // load store watchers
+  store.watch(
+    // when search changes, fetch new results
+    state => state.search,
+    search => store.dispatch('fetchResults', search),
+  );
+  // launch app
+  new Vue({
+    el: 'main',
+    store,
+  });
+  </script>
+
+</body>
+</html>
