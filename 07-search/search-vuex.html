@@ -28,9 +28,9 @@
   	},
     // define actions
   	actions: {
-      fetchResults (context, search) {
+      fetchResults (context) {
         // build api url and query it asyncronously
-        axios.get(`https://demo.dataverse.org/api/search?q=${ search }`)
+        axios.get(`https://demo.dataverse.org/api/search?q=${ this.state.search }`)
         // then save the results
         .then(res => context.commit('SAVE_RESULTS', res.data.data.items));
       },
@@ -44,7 +44,7 @@
   store.watch(
     // when search changes, fetch new results
     state => state.search,
-    search => store.dispatch('fetchResults', search),
+    () => store.dispatch('fetchResults'),
   );
   // launch app
   new Vue({
@@ -52,7 +52,7 @@
     store,
     created () {
       // load initial results
-      store.dispatch('fetchResults', store.state.search);
+      store.dispatch('fetchResults');
     },
   });
   </script>
