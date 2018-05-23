@@ -29,7 +29,7 @@
     // define actions
   	actions: {
       fetchResults (context, search) {
-        // query the search api asyncronously
+        // build api url and query it asyncronously
         axios.get(`https://demo.dataverse.org/api/search?q=${ search }`)
         // then save the results
         .then(res => context.commit('SAVE_RESULTS', res.data.data.items));
