@@ -25,7 +25,7 @@ export default {
       (value) => this.count = value
     )
   },
-  data() {
+  data () {
     return {
       count: 0,
     };

@@ -3,7 +3,6 @@
 <head>
   <title></title>
   <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'></script>
 </head>
 <body>
@@ -14,44 +13,41 @@
   <script>
   // register components
   Vue.component('search-input', {
-    template: `<p><input type='text' v-model='$store.state.search' /></p>`,
+    template: `<p><input type='text' v-model='$root.search' /></p>`,
   });
   Vue.component('search-results', {
-    template: '<section><ul><li v-for="result in $store.state.results">{{ result.name }}</li></ul></section>',
+    template: '<section><ul><li v-for="result in $root.results">{{ result.name }}</li></ul></section>',
   });
-  // build store
-  const store = new Vuex.Store({
-    // define initial state
-  	state: {
-  		search: '',
-      results: [],
-  	},
-    // define actions
-  	actions: {
-      fetchResults (context, search) {
-        // build api url and query it asyncronously
-        axios.get(`https://demo.dataverse.org/api/search?q=${ search }`)
-        // then save the results
-        .then(res => context.commit('SAVE_RESULTS', res.data.data.items));
-      },
-  	},
-    // define mutations
-  	mutations: {
-      SAVE_RESULTS: (state, payload) => state.results = payload,
-  	},
-  });
-  // load store watchers
-  store.watch(
-    // when search changes, fetch new results
-    state => state.search,
-    search => store.dispatch('fetchResults', search),
-  );
   // launch app
   new Vue({
     el: 'main',
-    store,
+    // define props
+    data () {
+      return {
+        search: 'tab',
+        results: [],
+      };
+    },
+    // define methods
+    methods: {
+      fetchResults (search) {
+        // build api url and query it asyncronously
+        axios.get(`https://demo.dataverse.org/api/search?q=${ search }`)
+        // then save the results
+        .then(res => this.saveResults(res.data.data.items));
+      },
+      saveResults (results) {
+        return this.results = results;
+      },
+    },
+    // define watchers
+    watch: {
+      search: {
+        handler: 'fetchResults',
+        immediate: true,
+      },
+    },
   });
   </script>
-
 </body>
 </html>
